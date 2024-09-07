@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
@@ -57,47 +58,26 @@ public class TintFeature : ScriptableRendererFeature
 
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
-            CommandBuffer cmd = CommandBufferPool.Get("TintFeature");
-            // flush buffer
-            context.ExecuteCommandBuffer(cmd);
-            cmd.Clear();
+            var commandBuffer = CommandBufferPool.Get("TintFeature");
+            // Set the target to a render texture
+            commandBuffer.SetRenderTarget(rt);
+            commandBuffer.ClearRenderTarget(true, true, Color.red);
+            context.ExecuteCommandBuffer(commandBuffer);
+            commandBuffer.Clear();
 
-            if (rt != null)
-            {
-                cmd.SetRenderTarget(rt);
-                // cmd.ClearRenderTarget(false, true, Color.black);
-            }
-
-            context.ExecuteCommandBuffer(
-                cmd); // DrawRenderers doesn't respect buffer order so the above commands need to be done immediately
-            cmd.Clear();
-
+            // Draw renderers to a texture
             var criteria = SortingCriteria.CommonOpaque;
             var drawingSettings = CreateDrawingSettings(shaderTags, ref renderingData, criteria);
-            context.DrawRenderers(renderingData.cullResults, ref drawingSettings, ref filteringSettings,
-                ref m_RenderStateBlock);
-
-            // if (rt != null) cmd.SetRenderTarget(renderingData.cameraData.renderer.cameraColorTarget);
-            context.ExecuteCommandBuffer(cmd);
-            CommandBufferPool.Release(cmd);
-
-            /*CommandBuffer cmd = CommandBufferPool.Get("TintFeature");
-
-            DrawingSettings drawSettings = CreateDrawingSettings(shaderTags, ref renderingData, SortingCriteria.CommonOpaque);
-            drawSettings.overrideMaterial = maskMat;
-            //DrawingSettings drawSettings2 = CreateDrawingSettings(shaderTags, ref renderingData, SortingCriteria.CommonOpaque);
-            //context.DrawRenderers(renderingData.cullResults, ref drawSettings2, ref filteringSettings);
-            context.DrawRenderers(renderingData.cullResults, ref drawSettings, ref filteringSettings);
+            context.DrawRenderers(
+                renderingData.cullResults,
+                ref drawingSettings,
+                ref filteringSettings,
+                ref m_RenderStateBlock
+            );
+            context.ExecuteCommandBuffer(commandBuffer);
+            commandBuffer.Clear();
+            
             context.Submit();
-            //Blit(cmd, source, tempTexture.Identifier(), material, 0);
-            //Blit(cmd, tempTexture.Identifier(), source);
-
-            //Blit(cmd, source, tempTexture.Identifier(), material, 0);
-            //Blit(cmd, tempTexture.Identifier(), source);
-            //Blit(cmd, ref renderingData, material, 0);
-
-            context.ExecuteCommandBuffer(cmd);
-            CommandBufferPool.Release(cmd);*/
         }
 
         // Cleanup any allocated resources that were created during the execution of this render pass.
