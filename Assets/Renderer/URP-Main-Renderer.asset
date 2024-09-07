@@ -15,9 +15,9 @@ MonoBehaviour:
   m_Active: 1
   settings:
     rt: {fileID: 8400000, guid: d45b92ff4da4b5d4583d6b5188ac4326, type: 2}
-    material: {fileID: 2100000, guid: 427799405f6759d45a7048f5fc06fbc7, type: 2}
-    maskMat: {fileID: 0}
-    nonMat: {fileID: 0}
+    material: {fileID: 0}
+    maskMat: {fileID: 2100000, guid: 427799405f6759d45a7048f5fc06fbc7, type: 2}
+    nonMat: {fileID: 2100000, guid: 427799405f6759d45a7048f5fc06fbc7, type: 2}
     layerMask:
       serializedVersion: 2
       m_Bits: 64
@@ -56,6 +56,29 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 3302065f671a8450b82c9ddf07426f3a, type: 3}
   - {fileID: 2800000, guid: 56a77a3e8d64f47b6afe9e3c95cb57d5, type: 3}
   m_Shader: {fileID: 4800000, guid: 0849e84e3d62649e8882e9d6f056a017, type: 3}
+--- !u!114 &-753546518229212854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc8496e2a244056b960e977d84d5a20, type: 3}
+  m_Name: EFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    rt: {fileID: 8400000, guid: d45b92ff4da4b5d4583d6b5188ac4326, type: 2}
+    rt2: {fileID: 8400000, guid: fdf37d22dd27b174eb6d91acd3aecb41, type: 2}
+    material: {fileID: -876546973899608171, guid: 1e6699eeb68eb19429382890f6ced440,
+      type: 3}
+    maskMat: {fileID: 0}
+    nonMat: {fileID: 0}
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 64
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +98,9 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
   - {fileID: -3197429014157254452}
-  m_RendererFeatureMap: adc0de57c6d2eee5cc20a1984073a0d3
+  - {fileID: -753546518229212854}
+  - {fileID: 1834986147175173548}
+  m_RendererFeatureMap: adc0de57c6d2eee5cc20a1984073a0d34a2137236fdd8af5ac8d23be2d2e7719
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -118,3 +143,24 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &1834986147175173548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30944560cc489344930a0c0fa3bf199, type: 3}
+  m_Name: TintFeature
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    rt: {fileID: 8400000, guid: 861f737a9122a8742822eb1bf537992c, type: 2}
+    material: {fileID: 0}
+    maskMat: {fileID: 0}
+    nonMat: {fileID: 0}
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 191
